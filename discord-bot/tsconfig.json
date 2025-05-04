@@ -1,0 +1,20 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", "build/**/*", "data/**/*"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./build",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
+    "paths": {
+      "@bot": ["bot.ts"],
+      "@logger": ["logger.ts"],
+      "@types": ["types.d.ts"],
+      "@commands": ["commands/_register.ts"],
+      "@events": ["events/_register.ts"]
+    }
+  }
+}
