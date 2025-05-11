@@ -1,3 +1,4 @@
+import bot from "@bot";
 import {
   ChatInputCommandInteraction,
   MessageFlags,
@@ -5,7 +6,6 @@ import {
 } from "discord.js";
 
 export default {
-  global: true,
   data: new SlashCommandBuilder()
     .setName("whitelist")
     .setDescription("Whitelist yourself one the server.")
@@ -16,8 +16,15 @@ export default {
         .setRequired(true)
     ),
   async execute(interaction: ChatInputCommandInteraction) {
+    const username = interaction.options.getString("username", true);
+
+    await bot.updateInDatabase(interaction.user.id, {
+      minecraft_username: username
+    });
+
     await interaction.reply({
-      content: "This command has yet to be implement.",
+      content:
+        "Your Minecraft username has been recorded and you have been whitelisted!",
       flags: MessageFlags.Ephemeral
     });
   }

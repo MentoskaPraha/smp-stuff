@@ -18,22 +18,22 @@ export interface BotEvent<K extends keyof ClientEvents = keyof ClientEvents> {
 }
 
 export interface BotCommand {
-  global: boolean;
   data: SlashCommandBuilder;
   execute(interaction: ChatInputCommandInteraction): Promise<void>;
 }
 
 export interface DatabaseEntry {
   id: string;
-  minecraft_username: string;
-  discord_color: string;
-  discord_color_role_id: string;
+  minecraft_username: string | null;
+  minecraft_color: string;
+  discord_color: string | null;
+  discord_color_role_id: string | null;
   mod_suggestions_number: number;
-  mod_suggestion_msg_1: string;
-  mod_suggestion_msg_2: string;
-  mod_suggestion_msg_3: string;
-  mod_suggestion_msg_4: string;
-  mod_suggestion_msg_5: string;
+  mod_suggestion_msg_1: string | null;
+  mod_suggestion_msg_2: string | null;
+  mod_suggestion_msg_3: string | null;
+  mod_suggestion_msg_4: string | null;
+  mod_suggestion_msg_5: string | null;
 }
 
 export type DatabaseEntryCreation = Optional<DatabaseEntry, "id">;

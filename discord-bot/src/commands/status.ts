@@ -5,7 +5,6 @@ import {
 } from "discord.js";
 
 export default {
-  global: true,
   data: new SlashCommandBuilder()
     .setName("status")
     .setDescription("Get the current system status."),

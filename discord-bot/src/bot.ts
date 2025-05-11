@@ -51,8 +51,8 @@ class DiscordBot {
       },
       minecraft_color: {
         type: STRING,
-        allowNull: true,
-        defaultValue: null
+        allowNull: false,
+        defaultValue: "white"
       },
       discord_color: {
         type: STRING,
@@ -143,24 +143,8 @@ class DiscordBot {
     const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
 
     rest
-      .put(Routes.applicationGuildCommands(this.clientID, this.guildID), {
-        body: (await commands)
-          .filter((command) => !command.global)
-          .map((command) => command.data.toJSON())
-      })
-      .then(() => logger.info("Register guild specific application commands!"))
-      .catch((error: Error) =>
-        logger.error(
-          error,
-          "Failed to register guild specific application commands!"
-        )
-      );
-
-    rest
       .put(Routes.applicationCommands(this.clientID), {
-        body: (await commands)
-          .filter((command) => command.global)
-          .map((command) => command.data.toJSON())
+        body: (await commands).map((command) => command.data.toJSON())
       })
       .then(() => logger.info("Register global application commands!"))
       .catch((error: Error) =>
@@ -200,6 +184,85 @@ class DiscordBot {
     }
 
     logger.info("Database is ready!");
+  }
+
+  /**
+   * Fetches a user's database entry or creates one if it doesn't exist.
+   * @param userID The Discord id of the user's entry.
+   * @returns The DatabaseEntry of the user provided.
+   */
+  async getFromDatabase(userID: string) {
+    const entry = await this.database.findOne({ where: { id: userID } });
+
+    if (entry == null) {
+      const newEntry = await this.database.create({
+        id: userID,
+        minecraft_username: null,
+        minecraft_color: "white",
+        mod_suggestions_number: 0
+      });
+
+      return newEntry.dataValues;
+    } else {
+      return entry.dataValues;
+    }
+  }
+
+  /**
+   * Update a certain database entry or creates one if it doesn't exist.
+   * @param userID The Discord id of the user's entry.
+   * @param updatedEntry The data that should be changed.
+   * @returns Whether the user existed or not.
+   */
+  async updateInDatabase(
+    userID: string,
+    updatedEntry: {
+      minecraft_username?: string | null;
+      minecraft_color?: string;
+      discord_color?: string | null;
+      discord_color_role_id?: string | null;
+      mod_suggestions_number?: number;
+      mod_suggestion_msg_1?: string | null;
+      mod_suggestion_msg_2?: string | null;
+      mod_suggestion_msg_3?: string | null;
+      mod_suggestion_msg_4?: string | null;
+      mod_suggestion_msg_5?: string | null;
+    }
+  ) {
+    const affected = await this.database.update(
+      {
+        minecraft_username: updatedEntry.minecraft_username,
+        minecraft_color: updatedEntry.minecraft_color,
+        discord_color: updatedEntry.discord_color,
+        discord_color_role_id: updatedEntry.discord_color_role_id,
+        mod_suggestions_number: updatedEntry.mod_suggestions_number,
+        mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
+        mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,
+        mod_suggestion_msg_3: updatedEntry.mod_suggestion_msg_3,
+        mod_suggestion_msg_4: updatedEntry.mod_suggestion_msg_4,
+        mod_suggestion_msg_5: updatedEntry.mod_suggestion_msg_5
+      },
+      { where: { id: userID } }
+    );
+
+    if (affected[0] == 0) {
+      await this.database.create({
+        id: userID,
+        minecraft_username: updatedEntry.minecraft_username,
+        minecraft_color: updatedEntry.minecraft_color ?? "white",
+        discord_color: updatedEntry.discord_color,
+        discord_color_role_id: updatedEntry.discord_color_role_id,
+        mod_suggestions_number: updatedEntry.mod_suggestions_number ?? 0,
+        mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
+        mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,
+        mod_suggestion_msg_3: updatedEntry.mod_suggestion_msg_3,
+        mod_suggestion_msg_4: updatedEntry.mod_suggestion_msg_4,
+        mod_suggestion_msg_5: updatedEntry.mod_suggestion_msg_5
+      });
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
