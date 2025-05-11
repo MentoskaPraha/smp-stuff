@@ -25,6 +25,7 @@ class DiscordBot {
   });
   public clientID = process.env.DISCORD_CLIENT_ID as string;
   public guildID = process.env.DISCORD_GUILD_ID as string;
+  public adminID = process.env.DISCORD_ADMIN_USER_ID as string;
 
   private sequilize = new Sequelize("database", "user", undefined, {
     host: "localhost",
@@ -273,7 +274,8 @@ class DiscordBotSetting {
     "config.json"
   );
 
-  public announcementChannelId: string | null = null;
+  public statusChannelId: string | null = null;
+  public gamechatChannelId: string | null = null;
   public modSuggestionChannelId: string | null = null;
   public modSuggestionsEnabled = false;
 
@@ -284,7 +286,8 @@ class DiscordBotSetting {
 
   updateConfigFile() {
     const config = {
-      announcementChannelId: this.announcementChannelId,
+      statusChannelId: this.statusChannelId,
+      gamechatChannelId: this.gamechatChannelId,
       modSuggestionChannelId: this.modSuggestionChannelId,
       modSuggestionsEnabled: this.modSuggestionsEnabled
     };
@@ -302,7 +305,8 @@ class DiscordBotSetting {
       const configJSON = readFileSync(this.configFile).toString();
       const config = JSON.parse(configJSON) as ConfigFileDate;
 
-      this.announcementChannelId = config.announcementChannelId;
+      this.statusChannelId = config.statusChannelId;
+      this.gamechatChannelId = config.gamechatChannelId;
       this.modSuggestionChannelId = config.modSuggestionChannelId;
       this.modSuggestionsEnabled = config.modSuggestionsEnabled;
     } catch (error) {

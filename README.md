@@ -4,7 +4,7 @@ This is code for a few utilities for my private SMP. It's comprised of 2 parts: 
 
 # Discord Bot Stuff
 
-This bot only works in one guild (Discord Server), all others will be ignored.
+This bot only works in one guild (Discord Server), if it is in multiple, it will break!
 
 Example env variables. All are required, except DEV.
 ```env

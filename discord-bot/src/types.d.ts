@@ -6,7 +6,8 @@ import {
 import { Optional } from "sequelize";
 
 export interface ConfigFileDate {
-  announcementChannelId: string | null;
+  statusChannelId: string | null;
+  gamechatChannelId: string | null;
   modSuggestionChannelId: string | null;
   modSuggestionsEnabled: boolean;
 }
