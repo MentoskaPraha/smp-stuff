@@ -29,6 +29,10 @@ export interface DatabaseEntry {
   minecraft_color: string;
   discord_color: string | null;
   discord_color_role_id: string | null;
+  notify_activity: boolean;
+  notify_activity_player_threshold: number;
+  notify_activity_cooldown_min: number;
+  notify_activity_timestamp: string | null;
   mod_suggestions_number: number;
   mod_suggestion_msg_1: string | null;
   mod_suggestion_msg_2: string | null;

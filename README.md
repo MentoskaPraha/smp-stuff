@@ -14,3 +14,39 @@ DISCORD_GUILD_ID=YOUR_GUILD_ID_GOES_HERE
 DISCORD_ADMIN_USER_ID=YOUR_USER_ID_GOES_HERE
 DEV=false
 ```
+
+# To-Do
+
+- [ ] Discord Bot Feature
+  - [X] Whitelisting
+  - [X] Color
+  - [X] Basic Settings
+  - [ ] Automatic mod suggestion filters
+  - [ ] Chat link
+    - [ ] Pass user messages
+    - [ ] Pass replies
+    - [ ] Pass pings
+    - [ ] Don't pass system messages
+  - [ ] Activity Ping
+  - [ ] Status
+    - [ ] Auto-update every 15 minutes
+    - [ ] Online players in status
+    - [ ] Bot Status
+      - [ ] Discord WS Ping
+      - [ ] DB Connection
+      - [ ] Uptime
+    - [ ] Server Status
+      - [ ] Bot WS Ping
+      - [ ] TPS for the last 15 minutes
+      - [ ] Uptime
+- [ ] Minecraft Mod Stuff
+  - [ ] WS to Discord Bot
+    - [ ] Chat link
+      - [ ] Pass player messages
+      - [ ] Pass system messages (deaths, player join/leave, etc.)
+      - [ ] Command to pin last messages in Discord
+    - [ ] Name color link
+    - [ ] Pass status to Discord
+    - [ ] Whitelisting
+  - [ ] Performance Monitoring
+  - [ ] Grey out name of idle players

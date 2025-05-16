@@ -8,7 +8,7 @@ import {
   REST,
   Routes
 } from "discord.js";
-import { INTEGER, ModelDefined, Sequelize, STRING } from "sequelize";
+import { BOOLEAN, INTEGER, ModelDefined, Sequelize, STRING } from "sequelize";
 import { join } from "node:path";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { ConfigFileDate, DatabaseEntry, DatabaseEntryCreation } from "@types";
@@ -65,6 +65,26 @@ class DiscordBot {
         allowNull: true,
         defaultValue: null
       },
+      notify_activity: {
+        type: BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+      notify_activity_player_threshold: {
+        type: INTEGER,
+        allowNull: false,
+        defaultValue: 5
+      },
+      notify_activity_cooldown_min: {
+        type: INTEGER,
+        allowNull: false,
+        defaultValue: 20
+      },
+      notify_activity_timestamp: {
+        type: STRING,
+        allowNull: true,
+        defaultValue: null
+      },
       mod_suggestions_number: {
         type: INTEGER,
         allowNull: false,
@@ -103,6 +123,8 @@ class DiscordBot {
     });
 
   public settings = new DiscordBotSetting();
+
+  public startTime = new Date(Date.now());
 
   login() {
     logger.debug("Bot is logging in...");
@@ -200,7 +222,10 @@ class DiscordBot {
         id: userID,
         minecraft_username: null,
         minecraft_color: "white",
-        mod_suggestions_number: 0
+        mod_suggestions_number: 0,
+        notify_activity: false,
+        notify_activity_player_threshold: 5,
+        notify_activity_cooldown_min: 20
       });
 
       return newEntry.dataValues;
@@ -222,6 +247,10 @@ class DiscordBot {
       minecraft_color?: string;
       discord_color?: string | null;
       discord_color_role_id?: string | null;
+      notify_activity?: boolean;
+      notify_activity_player_threshold?: number;
+      notify_activity_cooldown_min?: number;
+      notify_activity_timestamp?: string;
       mod_suggestions_number?: number;
       mod_suggestion_msg_1?: string | null;
       mod_suggestion_msg_2?: string | null;
@@ -236,6 +265,11 @@ class DiscordBot {
         minecraft_color: updatedEntry.minecraft_color,
         discord_color: updatedEntry.discord_color,
         discord_color_role_id: updatedEntry.discord_color_role_id,
+        notify_activity: updatedEntry.notify_activity,
+        notify_activity_player_threshold:
+          updatedEntry.notify_activity_player_threshold,
+        notify_activity_cooldown_min: updatedEntry.notify_activity_cooldown_min,
+        notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
         mod_suggestions_number: updatedEntry.mod_suggestions_number,
         mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
         mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,
@@ -253,6 +287,12 @@ class DiscordBot {
         minecraft_color: updatedEntry.minecraft_color ?? "white",
         discord_color: updatedEntry.discord_color,
         discord_color_role_id: updatedEntry.discord_color_role_id,
+        notify_activity: updatedEntry.notify_activity ?? false,
+        notify_activity_player_threshold:
+          updatedEntry.notify_activity_player_threshold ?? 5,
+        notify_activity_cooldown_min:
+          updatedEntry.notify_activity_cooldown_min ?? 20,
+        notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
         mod_suggestions_number: updatedEntry.mod_suggestions_number ?? 0,
         mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
         mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,

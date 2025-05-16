@@ -10,8 +10,10 @@ import {
 
 export default {
   data: new SlashCommandBuilder()
-    .setName("settings")
-    .setDescription("Change the bot's settings.")
+    .setName("channels")
+    .setDescription(
+      "Change the which channels the bot uses for certain things."
+    )
     .setContexts(InteractionContextType.Guild)
     .addSubcommand((subcommand) =>
       subcommand
