@@ -10,22 +10,17 @@ export default {
       message.channelId == bot.settings.modSuggestionChannelId &&
       bot.settings.modSuggestionsEnabled
     ) {
-      const regex = new RegExp("https:\/\/modrinth\.com\/project\/[A-Za-z0-9]");
-      if (!regex.test(message.content)) return;
-
-      const entry = await bot.getFromDatabase(message.author.id);
-      const msgs = JSON.parse(entry.mod_suggestion_msgs_array) as Array<string>;
-
-      const index = msgs.findIndex((val) => val == message.id);
-      msgs.splice(index, 1);
-
-      await bot.updateInDatabase(message.author.id, {
-        mod_suggestion_msgs_array: JSON.stringify(msgs)
+      const msg = await bot.mod_suggestion_msgs_database.findOne({
+        where: { id: message.id }
       });
 
-      logger.info(
-        `${message.author.displayName}(${message.author.id}) deleted a message(${message.id}) in mod_suggestions(${message.channelId}).`
-      );
+      if (msg != null) {
+        await msg.destroy();
+        logger.info(
+          `Someone deleted a message(${message.id}) ${message.author.displayName}(${message.author.id}) in mod_suggestions(${message.channelId}).`
+        );
+      }
+
       return;
     }
   }

@@ -58,6 +58,8 @@ export default {
           true
         );
 
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
         await channel.permissionOverwrites.create(bot.guildID, {
           SendMessages: false,
           SendMessagesInThreads: false,
@@ -82,9 +84,8 @@ export default {
           `modSuggestionChannelId has been updated to ${channel.id}!`
         );
 
-        await interaction.reply({
-          content: "The mod suggestion channel has been updated!",
-          flags: MessageFlags.Ephemeral
+        await interaction.editReply({
+          content: "The mod suggestion channel has been updated!"
         });
 
         break;
@@ -131,16 +132,38 @@ export default {
                 ? [
                     PermissionsBitField.Flags.SendMessages,
                     PermissionsBitField.Flags.SendMessagesInThreads,
-                    PermissionsBitField.Flags.CreatePublicThreads
+                    PermissionsBitField.Flags.EmbedLinks
                   ]
-                : undefined,
+                : [PermissionsBitField.Flags.EmbedLinks],
               deny: !state
                 ? [
                     PermissionsBitField.Flags.SendMessages,
                     PermissionsBitField.Flags.SendMessagesInThreads,
-                    PermissionsBitField.Flags.CreatePublicThreads
+                    PermissionsBitField.Flags.CreatePublicThreads,
+                    PermissionsBitField.Flags.CreatePrivateThreads,
+                    PermissionsBitField.Flags.AttachFiles,
+                    PermissionsBitField.Flags.AddReactions,
+                    PermissionsBitField.Flags.UseExternalEmojis,
+                    PermissionsBitField.Flags.SendTTSMessages,
+                    PermissionsBitField.Flags.SendVoiceMessages,
+                    PermissionsBitField.Flags.SendPolls,
+                    PermissionsBitField.Flags.UseApplicationCommands,
+                    PermissionsBitField.Flags.UseEmbeddedActivities,
+                    PermissionsBitField.Flags.UseExternalApps
                   ]
-                : undefined
+                : [
+                    PermissionsBitField.Flags.CreatePublicThreads,
+                    PermissionsBitField.Flags.CreatePrivateThreads,
+                    PermissionsBitField.Flags.AttachFiles,
+                    PermissionsBitField.Flags.AddReactions,
+                    PermissionsBitField.Flags.UseExternalEmojis,
+                    PermissionsBitField.Flags.SendTTSMessages,
+                    PermissionsBitField.Flags.SendVoiceMessages,
+                    PermissionsBitField.Flags.SendPolls,
+                    PermissionsBitField.Flags.UseApplicationCommands,
+                    PermissionsBitField.Flags.UseEmbeddedActivities,
+                    PermissionsBitField.Flags.UseExternalApps
+                  ]
             }
           ]
         });
@@ -164,9 +187,11 @@ export default {
         bot.settings.modSuggestionsEnabled = false;
         bot.settings.updateConfigFile();
 
-        bot.database.update({ mod_suggestion_msgs_array: "[]" }, { where: {} });
-        
-        await interaction.editReply("Reset mod suggestion feature to defaults.");
+        await bot.mod_suggestion_msgs_database.destroy({ where: {} });
+
+        await interaction.editReply(
+          "Reset mod suggestion feature to defaults."
+        );
 
         logger.info("Reset mod suggestion feature to defaults.");
         break;

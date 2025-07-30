@@ -18,7 +18,7 @@ export default {
   async execute(interaction: ChatInputCommandInteraction) {
     const username = interaction.options.getString("username", true);
 
-    await bot.updateInDatabase(interaction.user.id, {
+    await bot.updateUserInDatabase(interaction.user.id, {
       minecraft_username: username
     });
 

@@ -10,7 +10,7 @@ export default {
       message.channelId == bot.settings.modSuggestionChannelId &&
       bot.settings.modSuggestionsEnabled
     ) {
-      const regex = new RegExp("https:\/\/modrinth\.com\/project\/[A-Za-z0-9]");
+      const regex = new RegExp("https://modrinth.com/project/[A-Za-z0-9]");
       if (!regex.test(message.content)) {
         await message.delete();
         logger.info(
@@ -19,24 +19,30 @@ export default {
         return;
       }
 
-      const entry = await bot.getFromDatabase(message.author.id);
-      const msgs = JSON.parse(entry.mod_suggestion_msgs_array);
+      const msgs = await bot.mod_suggestion_msgs_database.findAll({
+        where: { authorId: message.author.id },
+        limit: 5,
+        order: [["createdAt", "ASC"]]
+      });
 
-      if (msgs.length == 5) {
-        await (await message.channel.messages.fetch(msgs[0])).delete();
-        msgs.shift();
-        await message.react("👍");
-        await message.react("👎");
-        msgs.push(message.id);
-      } else {
-        await message.react("👍");
-        await message.react("👎");
-        msgs.push(message.id);
+      if (msgs.length == 5)
+        await message.channel.messages.delete(msgs[0].dataValues.id);
+
+      const duplicate = await bot.createModSuggestionMsg(
+        message.id,
+        message.content,
+        message.author.id
+      );
+      if (duplicate) {
+        await message.delete();
+        logger.debug(
+          `${message.author.displayName}(${message.author.id}) tried to send a duplicate message in mod_suggestions(${message.channelId}) which was deleted.`
+        );
+        return;
       }
 
-      await bot.updateInDatabase(message.author.id, {
-        mod_suggestion_msgs_array: JSON.stringify(msgs)
-      });
+      await message.react("👍");
+      await message.react("👎");
 
       logger.info(
         `Registered and reacted to a message(${message.id}) in mod_suggestions(${message.channelId}) by ${message.author.displayName}(${message.author.id}).`

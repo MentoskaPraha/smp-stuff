@@ -2,7 +2,6 @@ import bot from "@bot";
 import {
   ChatInputCommandInteraction,
   EmbedBuilder,
-  InteractionContextType,
   MessageFlags,
   SlashCommandBuilder,
   ColorResolvable,
@@ -106,7 +105,7 @@ export default {
       case "view": {
         const embed = new EmbedBuilder().setTitle("Your Colors");
 
-        const entry = await bot.getFromDatabase(interaction.user.id);
+        const entry = await bot.getUserFromDatabase(interaction.user.id);
 
         if (entry.discord_color != null) {
           embed.setColor(entry.discord_color as ColorResolvable);
@@ -134,17 +133,16 @@ export default {
         break;
       }
       case "reset": {
-        const entry = await bot.getFromDatabase(interaction.user.id);
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-        if (entry.discord_color_role_id != null) {
-          await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+        const entry = await bot.getUserFromDatabase(interaction.user.id);
 
+        if (entry.discord_color_role_id != null)
           await (
             await bot.client.guilds.fetch(bot.guildID)
           ).roles.delete(entry.discord_color_role_id);
-        }
 
-        await bot.updateInDatabase(interaction.user.id, {
+        await bot.updateUserInDatabase(interaction.user.id, {
           minecraft_color: "white",
           discord_color: null,
           discord_color_role_id: null
@@ -158,7 +156,7 @@ export default {
       }
       case "match": {
         await interaction.deferReply({ flags: MessageFlags.Ephemeral });
-        const entry = await bot.getFromDatabase(interaction.user.id);
+        const entry = await bot.getUserFromDatabase(interaction.user.id);
         const newColor = MC_COLOR_TO_HEX.get(entry.minecraft_color) ?? "White";
 
         const guild = await bot.client.guilds.fetch(bot.guildID);
@@ -178,7 +176,7 @@ export default {
               newRole
             );
 
-            await bot.updateInDatabase(interaction.user.id, {
+            await bot.updateUserInDatabase(interaction.user.id, {
               discord_color: newColor,
               discord_color_role_id: newRole.id
             });
@@ -188,7 +186,7 @@ export default {
               `${interaction.user.username} updated their color.`
             );
 
-            await bot.updateInDatabase(interaction.user.id, {
+            await bot.updateUserInDatabase(interaction.user.id, {
               discord_color: newColor
             });
           }
@@ -206,7 +204,7 @@ export default {
             newRole
           );
 
-          await bot.updateInDatabase(interaction.user.id, {
+          await bot.updateUserInDatabase(interaction.user.id, {
             discord_color: newColor,
             discord_color_role_id: newRole.id
           });
@@ -222,7 +220,7 @@ export default {
       case "change_discord": {
         await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const newColor = interaction.options.getString("hex_code", true);
-        const entry = await bot.getFromDatabase(interaction.user.id);
+        const entry = await bot.getUserFromDatabase(interaction.user.id);
 
         const guild = await bot.client.guilds.fetch(bot.guildID);
         if (entry.discord_color_role_id != null) {
@@ -241,7 +239,7 @@ export default {
               newRole
             );
 
-            await bot.updateInDatabase(interaction.user.id, {
+            await bot.updateUserInDatabase(interaction.user.id, {
               discord_color: newColor,
               discord_color_role_id: newRole.id
             });
@@ -251,7 +249,7 @@ export default {
               `${interaction.user.username} updated their color.`
             );
 
-            await bot.updateInDatabase(interaction.user.id, {
+            await bot.updateUserInDatabase(interaction.user.id, {
               discord_color: newColor
             });
           }
@@ -269,7 +267,7 @@ export default {
             newRole
           );
 
-          await bot.updateInDatabase(interaction.user.id, {
+          await bot.updateUserInDatabase(interaction.user.id, {
             discord_color: newColor,
             discord_color_role_id: newRole.id
           });
@@ -282,7 +280,7 @@ export default {
         break;
       }
       case "change_minecraft": {
-        await bot.updateInDatabase(interaction.user.id, {
+        await bot.updateUserInDatabase(interaction.user.id, {
           minecraft_color: interaction.options.getString("color", true)
         });
 

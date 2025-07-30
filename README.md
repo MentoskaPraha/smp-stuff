@@ -21,13 +21,21 @@ DEV=false
   - [X] Whitelisting
   - [X] Color
   - [X] Basic Settings
-  - [ ] Automatic mod suggestion filters
+  - [ ] Automatic mod suggestion
+    - [X] Filters for valid links only
+    - [X] Automatic reactions added for polling
+    - [X] Duplicate detection
+    - [ ] Bot made starter message
+    - [ ] Add automatic thread management
   - [ ] Chat link
     - [ ] Pass user messages
     - [ ] Pass replies
     - [ ] Pass pings
     - [ ] Don't pass system messages
   - [ ] Activity Ping
+    - [ ] Update number of players on leave and join
+    - [ ] Send DM to user when X amount of players is online
+    - [ ] Add cooldown
   - [ ] Status
     - [ ] Auto-update every 15 minutes
     - [ ] Online players in status

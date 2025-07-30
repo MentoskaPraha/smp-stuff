@@ -8,10 +8,22 @@ import {
   REST,
   Routes
 } from "discord.js";
-import { BOOLEAN, INTEGER, ModelDefined, Sequelize, STRING } from "sequelize";
+import {
+  BOOLEAN,
+  INTEGER,
+  ModelDefined,
+  Sequelize,
+  STRING,
+  UniqueConstraintError
+} from "sequelize";
 import { join } from "node:path";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { ConfigFileDate, DatabaseEntry, DatabaseEntryCreation } from "@types";
+import {
+  ConfigFileDate,
+  DatabaseEntry,
+  DatabaseEntryCreation,
+  ModSuggestionMsgsDatabaseEntry
+} from "@types";
 
 class DiscordBot {
   public client = new Client({
@@ -37,7 +49,8 @@ class DiscordBot {
       "database.sqlite"
     )
   });
-  public database: ModelDefined<DatabaseEntry, DatabaseEntryCreation> =
+
+  public user_database: ModelDefined<DatabaseEntry, DatabaseEntryCreation> =
     this.sequilize.define("users", {
       id: {
         type: STRING,
@@ -84,14 +97,30 @@ class DiscordBot {
         type: STRING,
         allowNull: true,
         defaultValue: null
-      },
-      mod_suggestion_msgs_array: {
-        type: STRING,
-        allowNull: false,
-        defaultValue: "[]",
-        unique: false
       }
     });
+
+  public mod_suggestion_msgs_database: ModelDefined<
+    ModSuggestionMsgsDatabaseEntry,
+    ModSuggestionMsgsDatabaseEntry
+  > = this.sequilize.define("mod_suggestion_msgs", {
+    id: {
+      type: STRING,
+      unique: true,
+      primaryKey: true,
+      allowNull: false
+    },
+    content: {
+      type: STRING,
+      unique: true,
+      allowNull: false
+    },
+    authorId: {
+      type: STRING,
+      unique: false,
+      allowNull: false
+    }
+  });
 
   public settings = new DiscordBotSetting();
 
@@ -147,33 +176,76 @@ class DiscordBot {
   }
 
   async setupDatabase() {
+    //setup relations between databases
+    this.user_database.hasMany(this.mod_suggestion_msgs_database, {
+      foreignKey: "authorId"
+    });
+    this.mod_suggestion_msgs_database.belongsTo(this.user_database, {
+      foreignKey: "authorId"
+    });
+
     //sync the model to the db
     logger.debug("Syncing database model to database...");
-    await this.database.sync();
+    await this.user_database.sync();
+    await this.mod_suggestion_msgs_database.sync();
 
     //register logger hooks
     logger.debug("Registering hooks...");
-    this.database.afterCreate((entry) =>
-      logger.info(`Create new entry(${entry.dataValues.id}) in database.`)
+    this.user_database.afterCreate((entry) =>
+      logger.info(`Create new entry(${entry.dataValues.id}) in user database.`)
     );
-    this.database.afterUpdate((entry) =>
-      logger.info(`Updated entry(${entry.dataValues.id}) in database.`)
+    this.user_database.afterUpdate((entry) =>
+      logger.info(`Updated entry(${entry.dataValues.id}) in user database.`)
     );
-    this.database.afterDestroy((entry) =>
-      logger.info(`Removed entry(${entry.dataValues.id}) in database.`)
+    this.user_database.afterDestroy((entry) =>
+      logger.info(`Removed entry(${entry.dataValues.id}) in user database.`)
+    );
+    this.mod_suggestion_msgs_database.afterCreate((entry) =>
+      logger.info(
+        `Create new entry(${entry.dataValues.id}) in mod_suggestion_msgs database.`
+      )
+    );
+    this.mod_suggestion_msgs_database.afterUpdate((entry) =>
+      logger.info(
+        `Updated entry(${entry.dataValues.id}) in mod_suggestion_msgs database.`
+      )
+    );
+    this.mod_suggestion_msgs_database.afterDestroy((entry) =>
+      logger.info(
+        `Removed entry(${entry.dataValues.id}) in mod_suggestion_msgs database.`
+      )
     );
 
     if ((process.env.DEV as boolean | undefined) ?? false) {
-      this.database.beforeCreate((entry) =>
+      this.user_database.beforeCreate((entry) =>
         logger.debug(
-          `Creating new entry(${entry.dataValues.id}) in database...`
+          `Creating new entry(${entry.dataValues.id}) in user database...`
         )
       );
-      this.database.beforeUpdate((entry) =>
-        logger.debug(`Updating entry(${entry.dataValues.id}) in database...`)
+      this.user_database.beforeUpdate((entry) =>
+        logger.debug(
+          `Updating entry(${entry.dataValues.id}) in user database...`
+        )
       );
-      this.database.beforeDestroy((entry) =>
-        logger.debug(`Removing entry(${entry.dataValues.id}) in database...`)
+      this.user_database.beforeDestroy((entry) =>
+        logger.debug(
+          `Removing entry(${entry.dataValues.id}) in user database...`
+        )
+      );
+      this.mod_suggestion_msgs_database.beforeCreate((entry) =>
+        logger.debug(
+          `Creating new entry(${entry.dataValues.id}) in mod_suggestion_msgs database...`
+        )
+      );
+      this.mod_suggestion_msgs_database.beforeUpdate((entry) =>
+        logger.debug(
+          `Updating entry(${entry.dataValues.id}) in mod_suggestion_msgs database...`
+        )
+      );
+      this.mod_suggestion_msgs_database.beforeDestroy((entry) =>
+        logger.debug(
+          `Removing entry(${entry.dataValues.id}) in mod_suggestion_msgs database...`
+        )
       );
     }
 
@@ -185,18 +257,17 @@ class DiscordBot {
    * @param userID The Discord id of the user's entry.
    * @returns The DatabaseEntry of the user provided.
    */
-  async getFromDatabase(userID: string) {
-    const entry = await this.database.findOne({ where: { id: userID } });
+  async getUserFromDatabase(userID: string) {
+    const entry = await this.user_database.findOne({ where: { id: userID } });
 
     if (entry == null) {
-      const newEntry = await this.database.create({
+      const newEntry = await this.user_database.create({
         id: userID,
         minecraft_username: null,
         minecraft_color: "white",
         notify_activity: false,
         notify_activity_player_threshold: 5,
-        notify_activity_cooldown_min: 20,
-        mod_suggestion_msgs_array: "[]"
+        notify_activity_cooldown_min: 20
       });
 
       return newEntry.dataValues;
@@ -209,9 +280,8 @@ class DiscordBot {
    * Update a certain database entry or creates one if it doesn't exist.
    * @param userID The Discord id of the user's entry.
    * @param updatedEntry The data that should be changed.
-   * @returns Whether the user existed or not.
    */
-  async updateInDatabase(
+  async updateUserInDatabase(
     userID: string,
     updatedEntry: {
       minecraft_username?: string | null;
@@ -222,10 +292,9 @@ class DiscordBot {
       notify_activity_player_threshold?: number;
       notify_activity_cooldown_min?: number;
       notify_activity_timestamp?: string;
-      mod_suggestion_msgs_array?: string;
     }
   ) {
-    const affected = await this.database.update(
+    const affected = await this.user_database.update(
       {
         minecraft_username: updatedEntry.minecraft_username,
         minecraft_color: updatedEntry.minecraft_color,
@@ -235,14 +304,13 @@ class DiscordBot {
         notify_activity_player_threshold:
           updatedEntry.notify_activity_player_threshold,
         notify_activity_cooldown_min: updatedEntry.notify_activity_cooldown_min,
-        notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
-        mod_suggestion_msgs_array: updatedEntry.mod_suggestion_msgs_array
+        notify_activity_timestamp: updatedEntry.notify_activity_timestamp
       },
       { where: { id: userID } }
     );
 
     if (affected[0] == 0) {
-      await this.database.create({
+      await this.user_database.create({
         id: userID,
         minecraft_username: updatedEntry.minecraft_username,
         minecraft_color: updatedEntry.minecraft_color ?? "white",
@@ -253,13 +321,37 @@ class DiscordBot {
           updatedEntry.notify_activity_player_threshold ?? 5,
         notify_activity_cooldown_min:
           updatedEntry.notify_activity_cooldown_min ?? 20,
-        notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
-        mod_suggestion_msgs_array:
-          JSON.stringify(updatedEntry.mod_suggestion_msgs_array) ?? "[]"
+        notify_activity_timestamp: updatedEntry.notify_activity_timestamp
+      });
+    }
+  }
+
+  /**
+   * Creates a new Mod Suggestion Message in the database.
+   * @param msgId The id of the message.
+   * @param content The content of the message.
+   * @param userId The id of the author of the message.
+   * @returns True if the message is a duplicate, false otherwise.
+   */
+  async createModSuggestionMsg(msgId: string, content: string, userId: string) {
+    //make sure the author has a database entry
+    await this.getUserFromDatabase(userId);
+
+    //create the message
+    try {
+      await this.mod_suggestion_msgs_database.create({
+        id: msgId,
+        content: content,
+        authorId: userId
       });
       return false;
-    } else {
-      return true;
+    } catch (error) {
+      //if this error is thrown it's a duplicate
+      if (error instanceof UniqueConstraintError) {
+        return true;
+      } else {
+        throw error;
+      }
     }
   }
 }
