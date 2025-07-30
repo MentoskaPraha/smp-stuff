@@ -85,40 +85,11 @@ class DiscordBot {
         allowNull: true,
         defaultValue: null
       },
-      mod_suggestions_number: {
-        type: INTEGER,
+      mod_suggestion_msgs_array: {
+        type: STRING,
         allowNull: false,
-        defaultValue: 0
-      },
-      mod_suggestion_msg_1: {
-        type: STRING,
-        allowNull: true,
-        defaultValue: null,
-        unique: true
-      },
-      mod_suggestion_msg_2: {
-        type: STRING,
-        allowNull: true,
-        defaultValue: null,
-        unique: true
-      },
-      mod_suggestion_msg_3: {
-        type: STRING,
-        allowNull: true,
-        defaultValue: null,
-        unique: true
-      },
-      mod_suggestion_msg_4: {
-        type: STRING,
-        allowNull: true,
-        defaultValue: null,
-        unique: true
-      },
-      mod_suggestion_msg_5: {
-        type: STRING,
-        allowNull: true,
-        defaultValue: null,
-        unique: true
+        defaultValue: "[]",
+        unique: false
       }
     });
 
@@ -222,10 +193,10 @@ class DiscordBot {
         id: userID,
         minecraft_username: null,
         minecraft_color: "white",
-        mod_suggestions_number: 0,
         notify_activity: false,
         notify_activity_player_threshold: 5,
-        notify_activity_cooldown_min: 20
+        notify_activity_cooldown_min: 20,
+        mod_suggestion_msgs_array: "[]"
       });
 
       return newEntry.dataValues;
@@ -251,12 +222,7 @@ class DiscordBot {
       notify_activity_player_threshold?: number;
       notify_activity_cooldown_min?: number;
       notify_activity_timestamp?: string;
-      mod_suggestions_number?: number;
-      mod_suggestion_msg_1?: string | null;
-      mod_suggestion_msg_2?: string | null;
-      mod_suggestion_msg_3?: string | null;
-      mod_suggestion_msg_4?: string | null;
-      mod_suggestion_msg_5?: string | null;
+      mod_suggestion_msgs_array?: string;
     }
   ) {
     const affected = await this.database.update(
@@ -270,12 +236,7 @@ class DiscordBot {
           updatedEntry.notify_activity_player_threshold,
         notify_activity_cooldown_min: updatedEntry.notify_activity_cooldown_min,
         notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
-        mod_suggestions_number: updatedEntry.mod_suggestions_number,
-        mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
-        mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,
-        mod_suggestion_msg_3: updatedEntry.mod_suggestion_msg_3,
-        mod_suggestion_msg_4: updatedEntry.mod_suggestion_msg_4,
-        mod_suggestion_msg_5: updatedEntry.mod_suggestion_msg_5
+        mod_suggestion_msgs_array: updatedEntry.mod_suggestion_msgs_array
       },
       { where: { id: userID } }
     );
@@ -293,12 +254,8 @@ class DiscordBot {
         notify_activity_cooldown_min:
           updatedEntry.notify_activity_cooldown_min ?? 20,
         notify_activity_timestamp: updatedEntry.notify_activity_timestamp,
-        mod_suggestions_number: updatedEntry.mod_suggestions_number ?? 0,
-        mod_suggestion_msg_1: updatedEntry.mod_suggestion_msg_1,
-        mod_suggestion_msg_2: updatedEntry.mod_suggestion_msg_2,
-        mod_suggestion_msg_3: updatedEntry.mod_suggestion_msg_3,
-        mod_suggestion_msg_4: updatedEntry.mod_suggestion_msg_4,
-        mod_suggestion_msg_5: updatedEntry.mod_suggestion_msg_5
+        mod_suggestion_msgs_array:
+          JSON.stringify(updatedEntry.mod_suggestion_msgs_array) ?? "[]"
       });
       return false;
     } else {
@@ -322,6 +279,7 @@ class DiscordBotSetting {
   constructor() {
     //create the config file if it does not exist
     if (!existsSync(this.configFile)) this.updateConfigFile();
+    this.refreshConfigFromFile();
   }
 
   updateConfigFile() {

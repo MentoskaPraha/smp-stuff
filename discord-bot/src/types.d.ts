@@ -33,12 +33,7 @@ export interface DatabaseEntry {
   notify_activity_player_threshold: number;
   notify_activity_cooldown_min: number;
   notify_activity_timestamp: string | null;
-  mod_suggestions_number: number;
-  mod_suggestion_msg_1: string | null;
-  mod_suggestion_msg_2: string | null;
-  mod_suggestion_msg_3: string | null;
-  mod_suggestion_msg_4: string | null;
-  mod_suggestion_msg_5: string | null;
+  mod_suggestion_msgs_array: string;
 }
 
 export type DatabaseEntryCreation = Optional<DatabaseEntry, "id">;

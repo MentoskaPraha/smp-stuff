@@ -33,12 +33,12 @@ DEV=false
     - [ ] Online players in status
     - [ ] Bot Status
       - [ ] Discord WS Ping
-      - [ ] DB Connection
       - [ ] Uptime
     - [ ] Server Status
       - [ ] Bot WS Ping
       - [ ] TPS for the last 15 minutes
       - [ ] Uptime
+  - [ ] Clean up when user leaves the server
 - [ ] Minecraft Mod Stuff
   - [ ] WS to Discord Bot
     - [ ] Chat link

@@ -36,6 +36,11 @@ export default {
             .setDescription("The state of the lock.")
             .setRequired(true)
         )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("reset")
+        .setDescription("Resets the mod suggestion system.")
     ),
   async execute(interaction: ChatInputCommandInteraction) {
     if (interaction.user.id != bot.adminID) {
@@ -93,7 +98,7 @@ export default {
           return;
         }
 
-        const state = interaction.options.getBoolean("state", true);
+        const state = !interaction.options.getBoolean("state", true);
 
         await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
@@ -145,11 +150,25 @@ export default {
 
         logger.info(`modSuggestionsEnabled has been updated to ${state}!`);
 
-        await interaction.reply({
-          content: `The mod suggestion state has been updated!\nUsers ${state ? "now can" : "can no longer"} submit mod suggestions.`,
-          flags: MessageFlags.Ephemeral
+        await interaction.editReply({
+          content: `The mod suggestion state has been updated!\nUsers ${state ? "now can" : "can no longer"} submit mod suggestions.`
         });
 
+        break;
+      }
+
+      case "reset": {
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
+        bot.settings.modSuggestionChannelId = null;
+        bot.settings.modSuggestionsEnabled = false;
+        bot.settings.updateConfigFile();
+
+        bot.database.update({ mod_suggestion_msgs_array: "[]" }, { where: {} });
+        
+        await interaction.editReply("Reset mod suggestion feature to defaults.");
+
+        logger.info("Reset mod suggestion feature to defaults.");
         break;
       }
     }

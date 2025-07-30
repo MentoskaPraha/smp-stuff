@@ -5,7 +5,8 @@ import {
   InteractionContextType,
   MessageFlags,
   SlashCommandBuilder,
-  ColorResolvable
+  ColorResolvable,
+  GuildMemberRoleManager
 } from "discord.js";
 
 const MC_COLOR_TO_HEX = new Map<string, string>([
@@ -44,7 +45,6 @@ export default {
   data: new SlashCommandBuilder()
     .setName("color")
     .setDescription("Change the color of your name.")
-    .setContexts(InteractionContextType.Guild)
     .addSubcommand((subcommand) =>
       subcommand
         .setName("view")
@@ -150,9 +150,8 @@ export default {
           discord_color_role_id: null
         });
 
-        await interaction.reply({
-          content: "Your colors have been reset!",
-          flags: MessageFlags.Ephemeral
+        await interaction.editReply({
+          content: "Your colors have been reset!"
         });
 
         break;
@@ -170,10 +169,14 @@ export default {
               name: `Color: ${interaction.user.username}`,
               color: newColor as ColorResolvable,
               mentionable: false,
-              position: 0,
+              position: interaction.guild?.members.me?.roles.highest.position,
               permissions: [],
               reason: `${interaction.user.username} updated their color, but their color role stopped existing, so it was re-created.`
             });
+
+            await (interaction.member?.roles as GuildMemberRoleManager).add(
+              newRole
+            );
 
             await bot.updateInDatabase(interaction.user.id, {
               discord_color: newColor,
@@ -194,10 +197,14 @@ export default {
             name: `Color: ${interaction.user.username}`,
             color: newColor as ColorResolvable,
             mentionable: false,
-            position: 0,
+            position: interaction.guild?.members.me?.roles.highest.position,
             permissions: [],
             reason: `${interaction.user.username} updated their color, but their color role didn't exist, so it was created.`
           });
+
+          await (interaction.member?.roles as GuildMemberRoleManager).add(
+            newRole
+          );
 
           await bot.updateInDatabase(interaction.user.id, {
             discord_color: newColor,
@@ -205,10 +212,9 @@ export default {
           });
         }
 
-        await interaction.reply({
+        await interaction.editReply({
           content:
-            "Your Discord color has been updated to match your Minecraft color!",
-          flags: MessageFlags.Ephemeral
+            "Your Discord color has been updated to match your Minecraft color!"
         });
 
         break;
@@ -226,10 +232,14 @@ export default {
               name: `Color: ${interaction.user.username}`,
               color: newColor as ColorResolvable,
               mentionable: false,
-              position: 0,
+              position: interaction.guild?.members.me?.roles.highest.position,
               permissions: [],
               reason: `${interaction.user.username} updated their color, but their color role stopped existing, so it was re-created.`
             });
+
+            await (interaction.member?.roles as GuildMemberRoleManager).add(
+              newRole
+            );
 
             await bot.updateInDatabase(interaction.user.id, {
               discord_color: newColor,
@@ -250,10 +260,14 @@ export default {
             name: `Color: ${interaction.user.username}`,
             color: newColor as ColorResolvable,
             mentionable: false,
-            position: 0,
+            position: interaction.guild?.members.me?.roles.highest.position,
             permissions: [],
             reason: `${interaction.user.username} updated their color, but their color role didn't exist, so it was created.`
           });
+
+          await (interaction.member?.roles as GuildMemberRoleManager).add(
+            newRole
+          );
 
           await bot.updateInDatabase(interaction.user.id, {
             discord_color: newColor,
@@ -261,9 +275,8 @@ export default {
           });
         }
 
-        await interaction.reply({
-          content: "Your Discord color has been updated!",
-          flags: MessageFlags.Ephemeral
+        await interaction.editReply({
+          content: "Your Discord color has been updated!"
         });
 
         break;

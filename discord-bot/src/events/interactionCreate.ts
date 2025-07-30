@@ -31,7 +31,22 @@ export default {
         )
       )
       .catch((error: Error) => {
-        if (interaction.replied) {
+        if (interaction.deferred) {
+          interaction
+            .editReply({
+              content: `An error has occured during the execution of your command!\n${error.message}`
+            })
+            .catch((err: Error) =>
+              logger.error(
+                err,
+                `Failed to notify ${interaction.user.username}(${interaction.user.id}) that ${command.data.name} command had failed!`
+              )
+            );
+          logger.error(
+            error,
+            `An error occured when ${interaction.user.username}(${interaction.user.id}) ran ${command.data.name} command!`
+          );
+        } else if (interaction.replied) {
           interaction
             .followUp({
               content: `An error has occured during the execution of your command!\n${error.message}`,
