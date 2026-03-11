@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          override_hash_and_equals_in_result_sets: true
+          store_date_time_values_as_text: true
+          data_class_to_companions: true
+          databases:
+            database: lib/database/database.dart

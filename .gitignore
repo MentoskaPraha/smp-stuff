@@ -1,0 +1,9 @@
+# Discord Bot Stuff
+.dart_tool/
+.fvm/
+.env
+dev_data
+
+# General Stuff
+.DS_Store
+build/
