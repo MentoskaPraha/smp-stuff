@@ -13,16 +13,20 @@ class Users extends Table {
 
   Column<Snowflake> get discordId => customType(const SnowflakeType())();
   TextColumn get minecraftUsername => text().nullable()();
-  DateTimeColumn get createdAt => dateTime().clientDefault(() => DateTime.now())();
-  DateTimeColumn get lastModified => dateTime().clientDefault(() => DateTime.now())();
+  DateTimeColumn get createdAt =>
+      dateTime().clientDefault(() => DateTime.now())();
+  DateTimeColumn get lastModified =>
+      dateTime().clientDefault(() => DateTime.now())();
 }
 
 class Servers extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text().nullable()();
   BoolColumn get online => boolean().withDefault(const Constant(false))();
-  DateTimeColumn get createdAt => dateTime().clientDefault(() => DateTime.now())();
-  DateTimeColumn get lastModified => dateTime().clientDefault(() => DateTime.now())();
+  DateTimeColumn get createdAt =>
+      dateTime().clientDefault(() => DateTime.now())();
+  DateTimeColumn get lastModified =>
+      dateTime().clientDefault(() => DateTime.now())();
 }
 
 @DriftDatabase(tables: [Users])

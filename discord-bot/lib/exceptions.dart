@@ -17,7 +17,9 @@ class NoDiscordAdminIdException implements Exception {
 
   @override
   String toString() {
-    if (details == null) return "No Discord User ID for the admin user was provided.";
+    if (details == null) {
+      return "No Discord User ID for the admin user was provided.";
+    }
     return "No Discord User ID for the admin user was provided: $details";
   }
 }
@@ -29,7 +31,9 @@ class NoDiscordGuildIdException implements Exception {
 
   @override
   String toString() {
-    if (details == null) return "No Discord Guild ID for the guild was provided.";
+    if (details == null) {
+      return "No Discord Guild ID for the guild was provided.";
+    }
     return "No Discord Guild ID for the guild was provided: $details";
   }
 }
@@ -41,7 +45,9 @@ class NoDiscordClientIdException implements Exception {
 
   @override
   String toString() {
-    if (details == null) return "No Discord User ID for the client was provided.";
+    if (details == null) {
+      return "No Discord User ID for the client was provided.";
+    }
     return "No Discord User ID for the client was provided: $details";
   }
 }
