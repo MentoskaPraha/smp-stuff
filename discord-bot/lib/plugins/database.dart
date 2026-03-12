@@ -4,12 +4,21 @@ import "package:nyxx/nyxx.dart";
 
 class DatabasePlugin extends NyxxPlugin<NyxxGateway> {
   final Database db;
+  final _logger = Logger("Database");
 
   DatabasePlugin(this.db);
 
   @override
+  FutureOr<void> beforeConnect(
+    ApiOptions apiOptions,
+    ClientOptions clientOptions,
+  ) {
+    _logger.info("Database is ready!");
+  }
+
+  @override
   FutureOr<void> afterClose() {
-    return db.close();
+    return db.close().then((_) => _logger.info("Database was closed!"));
   }
 }
 

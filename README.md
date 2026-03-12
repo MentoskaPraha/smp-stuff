@@ -4,15 +4,16 @@ This is code for a few utilities for my private SMP. It's comprised of 2 parts: 
 
 # Discord Bot Stuff
 
-This bot only works in one guild (Discord Server), if it is in multiple, it will break!
+This bot only works in one guild (Discord Server), if it's in multiple it shouldn't break, but it won't do anything. The bot is configured via environment variables.
 
-Example env variables. All are required, except DEV.
+Example ENV variables. All are required, except `DEBUG` and `DATA_DIR`. It's important to set `DATA_DIR` in a development environment or application data will be stored in the `/data` directory.
 ```env
-DISCORD_TOKEN=YOUR_TOKEN_GOES_HERE
-DISCORD_CLIENT_ID=YOUR_CLIENT_ID_GOES_HERE
-DISCORD_GUILD_ID=YOUR_GUILD_ID_GOES_HERE
-DISCORD_ADMIN_USER_ID=YOUR_USER_ID_GOES_HERE
 DEV=false
+DEBUG=false
+DATA_DIR="/data"
+DISCORD_ADMIN_ID="YOUR-DISCORD-ID-HERE"
+DISCORD_GUILD_ID="DISCORD-SERVER-ID-HERE"
+DISCORD_TOKEN="DISCORD-BOT-TOKEN-HERE"
 ```
 
 # To-Do

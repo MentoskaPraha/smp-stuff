@@ -8,7 +8,6 @@ environment:
 dependencies:
   dotenv: ^4.2.0
   drift: ^2.32.0
-  get_it: ^9.2.1
   logging: ^1.3.0
   nyxx: ^6.8.1
   nyxx_commands: ^6.1.0

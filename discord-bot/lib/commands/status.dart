@@ -1,7 +1,7 @@
 import "package:nyxx/nyxx.dart";
 import "package:nyxx_commands/nyxx_commands.dart";
 
-final ping = ChatCommand(
+final status = ChatCommand(
   "status",
   "Get the bot's status.",
   id("status", (InteractionChatContext context) async {
@@ -25,12 +25,17 @@ final ping = ChatCommand(
       color: DiscordColor.fromRgb(0, 255, 0),
       timestamp: DateTime.now(),
       description:
-          "🟢 - Discord Connection\n🟢 - Database Connection\n🔴 - Pterodactyl Connection\n0 Game Servers Active",
+          "🟢 - Discord Connection\n🟢 - Database Connection\n🔴 - Pterodactyl Connection",
       fields: [
         EmbedFieldBuilder(
           name: "Discord Latency Metrics",
           value:
               "**Latency:** ${latency}ms\n**Real Latency:** ${realLatency}ms\n**Gateway Latency:** ${gatewayLatency}ms",
+          isInline: true,
+        ),
+        EmbedFieldBuilder(
+          name: "Game Server Status",
+          value: "There are no active game servers.",
           isInline: true,
         ),
       ],

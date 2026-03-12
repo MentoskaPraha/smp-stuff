@@ -1,0 +1,13 @@
+import 'database.dart';
+
+CREATE TRIGGER users_after_update_trigger
+  AFTER UPDATE ON users
+BEGIN
+  UPDATE users SET last_modified = STRFTIME('%s', 'NOW') WHERE discord_id = NEW.discord_id;
+END;
+
+CREATE TRIGGER servers_after_update_trigger
+  AFTER UPDATE ON servers
+BEGIN
+  UPDATE servers SET last_modified = STRFTIME('%s', 'NOW') WHERE id = NEW.id;
+END;

@@ -37,17 +37,3 @@ class NoDiscordGuildIdException implements Exception {
     return "No Discord Guild ID for the guild was provided: $details";
   }
 }
-
-class NoDiscordClientIdException implements Exception {
-  String? details;
-
-  NoDiscordClientIdException([this.details]);
-
-  @override
-  String toString() {
-    if (details == null) {
-      return "No Discord User ID for the client was provided.";
-    }
-    return "No Discord User ID for the client was provided: $details";
-  }
-}

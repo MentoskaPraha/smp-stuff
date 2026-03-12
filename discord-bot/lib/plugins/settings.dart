@@ -5,13 +5,11 @@ class Settings {
   final Directory dataDir;
   final Snowflake adminId;
   final Snowflake guildId;
-  final Snowflake clientId;
 
   Settings({
     required this.dataDir,
     required this.adminId,
     required this.guildId,
-    required this.clientId,
   });
 }
 

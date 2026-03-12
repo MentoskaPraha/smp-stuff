@@ -1,4 +1,5 @@
 import "dart:io";
+import "package:discord_bot/database/logger.dart";
 import "package:discord_bot/database/snowflake.dart";
 import "package:drift/drift.dart";
 import "package:drift/native.dart";
@@ -29,7 +30,7 @@ class Servers extends Table {
       dateTime().clientDefault(() => DateTime.now())();
 }
 
-@DriftDatabase(tables: [Users])
+@DriftDatabase(tables: [Users, Servers], include: {"triggers.drift"})
 class Database extends _$Database {
   /**
    * Create a new database instance. Must provide QueryExecutor
@@ -48,6 +49,6 @@ class Database extends _$Database {
         database.execute("pragma journal_mode = WAL;");
       },
       readPool: 2,
-    );
+    ).interceptWith(LogInterceptor());
   }
 }
