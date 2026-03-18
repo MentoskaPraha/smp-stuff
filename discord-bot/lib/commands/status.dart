@@ -22,10 +22,11 @@ final status = ChatCommand(
     //build response embed
     final embed = EmbedBuilder(
       title: "Status",
-      color: DiscordColor.fromRgb(0, 255, 0),
+      color: DiscordColor.fromRgb(255, 165, 0),
       timestamp: DateTime.now(),
       description:
           "🟢 - Discord Connection\n🟢 - Database Connection\n🔴 - Pterodactyl Connection",
+      footer: EmbedFooterBuilder(text: "Version: 1.0.0"),
       fields: [
         EmbedFieldBuilder(
           name: "Discord Latency Metrics",

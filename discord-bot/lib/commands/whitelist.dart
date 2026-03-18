@@ -16,26 +16,13 @@ ChatGroup whitelist(Snowflake guildId) => ChatGroup(
         InteractionChatContext context,
         @Description("Your Minecraft username.") String username,
       ) async {
-        final db = context.client.db;
-        final user =
-            await ((db.select(db.users)
-                  ..where((u) => u.discordId.equals(context.user.id)))
-                .getSingleOrNull());
+        final db = context.client.database;
 
-        if (user != null) {
-          await (db.update(db.users)
-                ..where((u) => u.discordId.equals(context.user.id)))
-              .write(UsersCompanion(minecraftUsername: Value(username)));
-        } else {
-          await (db
-              .into(db.users)
-              .insert(
-                UsersCompanion.insert(
-                  discordId: context.user.id,
-                  minecraftUsername: Value(username),
-                ),
-              ));
-        }
+        await (db.update(db.users)
+              ..where((u) => u.discordId.equals(context.user.id)))
+            .write(UsersCompanion(minecraftUsername: Value(username)));
+
+        //TODO Sync the whitelist with servers that are online.
 
         await context.respond(
           Utils.successMessage(
@@ -47,8 +34,8 @@ ChatGroup whitelist(Snowflake guildId) => ChatGroup(
     ChatCommand(
       "get",
       "Returns the Minecraft username that's used to whitelist you.",
-      (InteractionChatContext context) async {
-        final db = context.client.db;
+      id("whitelist-get", (InteractionChatContext context) async {
+        final db = context.client.database;
         final user =
             await ((db.select(db.users)
                   ..where((u) => u.discordId.equals(context.user.id)))
@@ -65,7 +52,7 @@ ChatGroup whitelist(Snowflake guildId) => ChatGroup(
             Utils.successMessage("${user!.minecraftUsername}"),
           );
         }
-      },
+      }),
     ),
   ],
   options: CommandOptions(

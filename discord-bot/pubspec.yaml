@@ -12,7 +12,9 @@ dependencies:
   nyxx: ^6.8.1
   nyxx_commands: ^6.1.0
   path: ^1.9.1
+  shelf_web_socket: ^3.0.0
   sqlite3: ^3.2.0
+  web_socket_channel: ^3.0.3
 
 dev_dependencies:
   lints: ^6.0.0

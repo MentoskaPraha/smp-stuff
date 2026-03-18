@@ -52,7 +52,7 @@ void main() async {
     options: GatewayClientOptions(
       plugins: [
         cliIntegration,
-        commands(settings.guildId),
+        commands(settings.adminId, settings.guildId),
         SettingsPlugin(settings),
         DatabasePlugin(Database(dataDir)),
         Logging(logLevel: debug ? Level.ALL : Level.INFO),
