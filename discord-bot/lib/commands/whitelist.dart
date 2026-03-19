@@ -19,7 +19,7 @@ ChatGroup whitelist(Snowflake guildId) => ChatGroup(
         final db = context.client.database;
 
         await (db.update(db.users)
-              ..where((u) => u.discordId.equals(context.user.id)))
+              ..where((u) => u.id.equals(context.user.id)))
             .write(UsersCompanion(minecraftUsername: Value(username)));
 
         //TODO Sync the whitelist with servers that are online.
@@ -38,7 +38,7 @@ ChatGroup whitelist(Snowflake guildId) => ChatGroup(
         final db = context.client.database;
         final user =
             await ((db.select(db.users)
-                  ..where((u) => u.discordId.equals(context.user.id)))
+                  ..where((u) => u.id.equals(context.user.id)))
                 .getSingleOrNull());
 
         if (user?.minecraftUsername == null) {

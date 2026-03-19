@@ -10,9 +10,9 @@ part "database.g.dart";
 
 class Users extends Table {
   @override
-  Set<Column> get primaryKey => {discordId};
+  Set<Column> get primaryKey => {id};
 
-  Column<Snowflake> get discordId => customType(const SnowflakeType())();
+  Column<Snowflake> get id => customType(const SnowflakeType())();
   TextColumn get minecraftUsername => text().nullable()();
   DateTimeColumn get createdAt =>
       dateTime().clientDefault(() => DateTime.now())();
@@ -20,9 +20,13 @@ class Users extends Table {
       dateTime().clientDefault(() => DateTime.now())();
 }
 
-class Servers extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text().nullable()();
+class PterodactylServers extends Table {
+  @override
+  Set<Column> get primaryKey => {id};
+
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get description => text()();
   BoolColumn get online => boolean().withDefault(const Constant(false))();
   DateTimeColumn get createdAt =>
       dateTime().clientDefault(() => DateTime.now())();
@@ -30,7 +34,7 @@ class Servers extends Table {
       dateTime().clientDefault(() => DateTime.now())();
 }
 
-@DriftDatabase(tables: [Users, Servers], include: {"triggers.drift"})
+@DriftDatabase(tables: [Users, PterodactylServers], include: {"triggers.drift"})
 class Database extends _$Database {
   /**
    * Create a new database instance. Must provide QueryExecutor

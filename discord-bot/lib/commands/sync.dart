@@ -21,7 +21,7 @@ ChatCommand sync(Snowflake userId) => ChatCommand(
     final memberIds = members.map((m) => m.id).toSet();
 
     final users = membersAndUsers[1] as List<User>;
-    final userIds = users.map((u) => u.discordId).toSet();
+    final userIds = users.map((u) => u.id).toSet();
 
     final addIds = memberIds.where((id) => !userIds.contains(id));
     final removeIds = userIds.where((id) => !memberIds.contains(id));
@@ -32,7 +32,7 @@ ChatCommand sync(Snowflake userId) => ChatCommand(
           (id) => db
               .into(db.users)
               .insert(
-                UsersCompanion.insert(discordId: id),
+                UsersCompanion.insert(id: id),
                 mode: InsertMode.insertOrIgnore,
                 onConflict: DoNothing(),
               ),
@@ -40,7 +40,7 @@ ChatCommand sync(Snowflake userId) => ChatCommand(
       );
       await (db.delete(
         db.users,
-      )..where((u) => u.discordId.isIn(removeIds))).go();
+      )..where((u) => u.id.isIn(removeIds))).go();
     });
 
     await context.respond(Utils.successMessage());

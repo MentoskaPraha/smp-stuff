@@ -31,22 +31,18 @@ class DatabasePlugin extends NyxxPlugin<NyxxGateway> {
   }
 
   @override
-  FutureOr<void> beforeClose(NyxxGateway client) async {
+  FutureOr<void> afterClose() async {
     await _onGuildMemberAddedListener?.cancel();
     await _onGuildMemberRemovedListener?.cancel();
+    await db.close();
+    _logger.info("Database was closed!");
   }
-
-  @override
-  FutureOr<void> afterClose() =>
-      db.close().then((_) => _logger.info("Database was closed!"));
 
   void _onGuildMemberAdded(GuildMemberAddEvent event) async {
     if (event.guildId != event.gateway.client.settings.guildId) return;
 
     final data = await Future.wait([
-      db
-          .into(db.users)
-          .insert(UsersCompanion.insert(discordId: event.member.id)),
+      db.into(db.users).insert(UsersCompanion.insert(id: event.member.id)),
       event.gateway.client.users.createDm(event.member.id),
     ]);
 
@@ -70,9 +66,7 @@ class DatabasePlugin extends NyxxPlugin<NyxxGateway> {
     if (event.guildId != event.gateway.client.settings.guildId) return;
 
     final data = await Future.wait([
-      (db.delete(
-        db.users,
-      )..where((u) => u.discordId.equals(event.user.id))).go(),
+      (db.delete(db.users)..where((u) => u.id.equals(event.user.id))).go(),
       event.gateway.client.users.createDm(event.user.id),
     ]);
 
