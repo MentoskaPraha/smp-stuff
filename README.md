@@ -59,3 +59,7 @@ DISCORD_TOKEN="DISCORD-BOT-TOKEN-HERE"
     - [ ] Whitelisting
   - [ ] Performance Monitoring
   - [ ] Grey out name of idle players
+
+# Excel to Packwiz Script
+
+This script was used to convert an excel sheet to a packwiz pack. I made it with AI be mad about, I don't care. I don't write in python and I needed it for this one thing only and this was the easiest solution.
