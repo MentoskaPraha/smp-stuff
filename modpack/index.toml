@@ -22,7 +22,7 @@ hash = "5e8063bc20d6652022fbeee40031874ea7d44971fe397aee92de678c75a0ac78"
 
 [[files]]
 file = "config/NoChatReports/NCR-Encryption.json"
-hash = "0f61ac30bfc78653a30d715f793e30a6a43d6715106706487efd0aea5d43a84c"
+hash = "45f4027b16288786842a792a8263197df73e696406fa72f78eabfd0a544fa181"
 
 [[files]]
 file = "config/NoChatReports/NCR-ServerPreferences.json"
@@ -226,7 +226,7 @@ hash = "3e05221436880d09fbac95dfc9cde9d2225e8cfdb81ea0c4a41a453934acf938"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "bfc2042be2c41edfdb531387cac9e9bb4db2f0f088eda1a460a113e9eb7140b1"
+hash = "ae67e5f730c80891beb4145c625f1ab986e7374efbbf5273dbb1bace8eed6b50"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
@@ -410,7 +410,7 @@ hash = "6979ddda3b2c727de8a6bf2bdc3da67abeda22072c92ecfc1406f389e4eeebb8"
 
 [[files]]
 file = "config/gravestone-server.toml"
-hash = "746ced134e9f2bf1cf0ce28931028457d5cffa3fec6b2e3f5496d33786686d8a"
+hash = "d37470a9acd9368d82dde1b33ed52cdbb201e81d4ea811bc3b0cbc10800ddf33"
 
 [[files]]
 file = "config/hardcorerevival-common.toml"
@@ -438,7 +438,7 @@ hash = "5754114a0a663b321793a61f741bafa70c2a6dd649657260cdc096600763ad94"
 
 [[files]]
 file = "config/jade/plugins.json"
-hash = "f664c6c913f27c19ad9bfca19a9c64ed1f254ccbb04c7a49d220907e98b4f889"
+hash = "1add7cd3566dc672c3c24174a710ff26da83e32e32adab37f1b29109816ddeb2"
 
 [[files]]
 file = "config/jade/sort-order.json"
@@ -530,7 +530,7 @@ hash = "0614f722541191b6ddcfb686f97d5ea9a3280d32f8e0607c0d31dffe9a2dc5d7"
 
 [[files]]
 file = "config/sablejade-client.toml"
-hash = "3a181ddd2639409c91b4f58b6358f7b7bf52bbeff89ac0f907197e5865e6930e"
+hash = "de6f11e0a9a688f4a885b421b7c80142df397e25a04844fb4e2c2a442d7b2f0e"
 
 [[files]]
 file = "config/screenshot_viewer-client.toml"
@@ -542,7 +542,7 @@ hash = "5003e8894f9865317ea5f5ec6a7a16cf59bae573d173722b92155545506cf4e9"
 
 [[files]]
 file = "config/simulated-client.toml"
-hash = "944ba0d36dfe00436e814fffd736acdd51292da18a01a060ea6ffbcf3dc7388b"
+hash = "620b84f77ac0ed324873c27af842bdc6fbc9cdf3a24974a2383c888a6bd35a96"
 
 [[files]]
 file = "config/simulated-server.toml"
@@ -742,7 +742,7 @@ hash = "f9162390d08d058034f536bb5f5e8d87237d44d8a715058778ead6edd675d18e"
 
 [[files]]
 file = "mods/ai-improvements.pw.toml"
-hash = "3d8f918c52e27d4c640f78c67c0a51a2ddbe4e3703c149e8ed9461f43bd5fedd"
+hash = "62611a2b798035390a280b158563cfa590ab6f3465b77be46949839809dbe77f"
 metafile = true
 
 [[files]]
@@ -762,7 +762,7 @@ metafile = true
 
 [[files]]
 file = "mods/audioplayer.pw.toml"
-hash = "dc3575dab2673b765947da8a87c01464ea77af8fe355fe18579dce514b35be7a"
+hash = "a77830f11c321ef40ace0c3f9c3974e206dc3b788dfc9c767248152ccda7f53b"
 metafile = true
 
 [[files]]
@@ -773,6 +773,11 @@ metafile = true
 [[files]]
 file = "mods/better-compatibility-checker.pw.toml"
 hash = "7c3b1f4819e8a3b88cadd8ed968d74491c71f504738dd0f2cd60f3ff40d80f72"
+metafile = true
+
+[[files]]
+file = "mods/better-ping-display.pw.toml"
+hash = "cc2e6dda94a7a6f5487843cafe569d8044bf9482cbf03f062cf4595f1fb05281"
 metafile = true
 
 [[files]]
@@ -897,7 +902,7 @@ metafile = true
 
 [[files]]
 file = "mods/create-threaded-trains.pw.toml"
-hash = "cc05bcaec0e857c6a6f7de4bd09a22ad195b5b77a25e4adfe737915ac3be68db"
+hash = "f802c6f488a0141d9a51624bcce33c80c2c3d4bea731ea3f9301a6ec9d36cf4d"
 metafile = true
 
 [[files]]
@@ -927,7 +932,7 @@ metafile = true
 
 [[files]]
 file = "mods/double-doors.pw.toml"
-hash = "99f1ddd42145295a0e53c87a4e14185c975e8b2174a53295a9021988f0748081"
+hash = "c7e3cfd32470d3e42baf3dc1dfcf9f17fb43df548d446ae32ec8a105d7604748"
 metafile = true
 
 [[files]]
@@ -1056,6 +1061,11 @@ hash = "58e0bebd41fa44f3f0dd6c053ec3eb1529d4bfe0c054c0741ba6e2e1b8e4523e"
 metafile = true
 
 [[files]]
+file = "mods/lithostitched.pw.toml"
+hash = "6cb90789f0adf2996fd38d3bb22d3e6e09fe00d25653ed5012e8f10846ed6df7"
+metafile = true
+
+[[files]]
 file = "mods/map-atlases-forge.pw.toml"
 hash = "88669a9f7da5bc6cbdef599dcbcc680df8b93120c383f6d1f65bbd30f05d5d01"
 metafile = true
@@ -1077,7 +1087,7 @@ metafile = true
 
 [[files]]
 file = "mods/netherportalfix.pw.toml"
-hash = "5dc059422613b5645cb00e32d3bfd53de428c4939113d11ce2c844cb54165da6"
+hash = "748bdcbc7788a77881979189827f1baf3f6ef5fdaeb58b00e51e043c2c0abe39"
 metafile = true
 
 [[files]]
@@ -1092,7 +1102,7 @@ metafile = true
 
 [[files]]
 file = "mods/no-feather-trample.pw.toml"
-hash = "3822a5fb5fb1ba176870011765ce5cc2da90d3faccd2b938d1e5369a1acc5cdd"
+hash = "dce3f12b9534b04e84040c49030e7d775dd4a6091c4504dbb72468372e5787ef"
 metafile = true
 
 [[files]]
@@ -1103,6 +1113,11 @@ metafile = true
 [[files]]
 file = "mods/numismatics.pw.toml"
 hash = "f0a5a2604c8d733222a25e9c19dcf443d853864ed76a388b26982be97fdea71f"
+metafile = true
+
+[[files]]
+file = "mods/paxi.pw.toml"
+hash = "215d597764d5c5db89e700fc3495b72dc0a7f09c975de19dc8c580bde3469a5e"
 metafile = true
 
 [[files]]
@@ -1167,7 +1182,7 @@ metafile = true
 
 [[files]]
 file = "mods/underwater-enchanting.pw.toml"
-hash = "9ac43b85b3228dfdcd485b66b2355d247eff0e5a409246254bde4da578279546"
+hash = "91ef1d0355b2f893b8a983976f43e7d9d39a547ed25ac6e3dadd3f3b97670248"
 metafile = true
 
 [[files]]
@@ -1181,12 +1196,13 @@ hash = "1b64257444bc13e119cabd9fc49b91f465d592e30b3ba79def88b5f69dac1db2"
 metafile = true
 
 [[files]]
-file = "optional_datapacks/Aetherial_Islands_Clusters_Edit_1.2.0.zip"
-hash = "0f097a86488a40c139b1e851be89e42e16618426b9543051ba3eb938fc35c721"
+file = "mods/yungs-api.pw.toml"
+hash = "d9c0c9209bac0b693af2a7c1e47ffb28d366bad19c91df31dc6d345fa75250a1"
+metafile = true
 
 [[files]]
-file = "optional_datapacks/No_Void_Structures_2.0.1.zip"
-hash = "3d4fd4176d0c56287b6e44efaf2472ebd49743f9bb8851bc111395e65a89af58"
+file = "optional_datapacks/Aetherial_Islands_Clusters_Edit_1.2.0.zip"
+hash = "0f097a86488a40c139b1e851be89e42e16618426b9543051ba3eb938fc35c721"
 
 [[files]]
 file = "optional_datapacks/Skylands_Over_The_Sea_3.0.1.zip"
@@ -1202,7 +1218,7 @@ hash = "ef42c22ef97682901a264770e8566efd7eac3046929c995c1e53656b88f88cae"
 
 [[files]]
 file = "options.txt"
-hash = "9c8b7e6093d9ecda264f13abb18e29b181587582fbca49a350302a120a8d8531"
+hash = "a36d76a93c97a82ca209d47de558a14b809ca4091029e2e2ab45c3045f95aee1"
 
 [[files]]
 file = "resourcepacks/VanillaTweaks_r304834_MC1.21.x.zip"

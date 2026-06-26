@@ -62,11 +62,11 @@ advancedItemTooltips:false
 pauseOnLostFocus:true
 overrideWidth:0
 overrideHeight:0
-chatHeightFocused:1.0
+chatHeightFocused:0.7658450704225352
 chatDelay:0.0
 chatHeightUnfocused:0.4375
-chatScale:1.0
-chatWidth:1.0
+chatScale:0.7552816901408451
+chatWidth:0.7711267605633803
 notificationDisplayTime:1.0
 useNativeTransport:true
 mainHand:"right"
@@ -75,9 +75,9 @@ tutorialStep:none
 mouseWheelSensitivity:1.0
 rawMouseInput:true
 glDebugVerbosity:1
-skipMultiplayerWarning:false
+skipMultiplayerWarning:true
 hideMatchedNames:true
-joinedFirstServer:false
+joinedFirstServer:true
 hideBundleTutorial:false
 syncChunkWrites:false
 showAutosaveIndicator:true
@@ -122,8 +122,8 @@ key_key.hotbar.7:key.keyboard.7
 key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
 key_key.yo_hooks.jump:key.keyboard.space
-key_key.yo_hooks.climb:key.keyboard.unknown
-key_key.yo_hooks.climb_down:key.keyboard.unknown
+key_key.yo_hooks.climb:key.keyboard.left.control
+key_key.yo_hooks.climb_down:key.keyboard.left.shift
 key_key.yo_hooks.prevent_use:key.keyboard.unknown
 key_iris.keybind.reload:key.keyboard.unknown
 key_iris.keybind.toggleShaders:key.keyboard.unknown
@@ -169,7 +169,7 @@ key_create.keyinfo.alt_modifier:key.keyboard.left.alt
 key_key.pipeorgans.midi_config:key.keyboard.semicolon
 key_key.screenshot_viewer.open_screenshots_screen:key.keyboard.unknown
 soundCategory_master:1.0
-soundCategory_music:0.3028169014084507
+soundCategory_music:0.0
 soundCategory_record:1.0
 soundCategory_weather:1.0
 soundCategory_block:1.0
