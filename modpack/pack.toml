@@ -1,6 +1,6 @@
-name = "SMP Modpack"
+name = "Aeronautics SMP"
 author = "MentoskaPraha & Gljue"
-version = "1.0.0"
+version = "1.1.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
