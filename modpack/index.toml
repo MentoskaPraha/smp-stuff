@@ -37,6 +37,10 @@ file = "config/aeronautics-server.toml"
 hash = "733a50c4a935c18257572c88cf0df06e85978671930984248d4dac1ffdfb6b19"
 
 [[files]]
+file = "config/aiimprovements-common.toml"
+hash = "16eb2dc098fab4a2b7192cb87522640bdd87d39a97ad13ac081aca206f2706b2"
+
+[[files]]
 file = "config/appleskin-client.toml"
 hash = "6a3624ed584e6d2c4323957c3ca3d17bf2c01c7bbb73b9ee487378ff69d88aba"
 
@@ -225,12 +229,20 @@ file = "config/attributefix/sable/player.sub_level_punch_strength.json"
 hash = "3e05221436880d09fbac95dfc9cde9d2225e8cfdb81ea0c4a41a453934acf938"
 
 [[files]]
+file = "config/audioplayer/audioplayer-server.properties"
+hash = "9620cf27cf18382b4a60d0b7a3ecec9b1e213b84fbb26b5deb4ba24655af3442"
+
+[[files]]
 file = "config/bcc-common.toml"
-hash = "78abccc7fb974f5670d30d986b31b8ad81bca196ac4d253d0a1a481a4b3c211a"
+hash = "5ac1d9c7d8e26f3b62dd4d75cceac99721fef67ce46fd73c8ef6015b55b67620"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
 hash = "167486d8ac09ab9959c9b98c97c169365eaa9e5be0488b9ff8e6a04695d456e0"
+
+[[files]]
+file = "config/betterpingdisplay-client.toml"
+hash = "e3ea7a04c684bab4eccdf8dfd866cc01d041195fca88ef1dc19e9b0fbe0dc811"
 
 [[files]]
 file = "config/boatiview-client.toml"
@@ -263,6 +275,10 @@ hash = "53a5ca163195a69c27765a7cb62a510d8dd35c1e78273d60d98d487e18fc4226"
 [[files]]
 file = "config/connector.json"
 hash = "67bee06b2b321ed25e0d4e9b5bac7ab76c8ae76442de6caf11f463ce2ae1ac5e"
+
+[[files]]
+file = "config/continuity.json"
+hash = "00267a602028cbb037dcb0b5f803db31bed284235ca9c1ea189ad4179311a2f4"
 
 [[files]]
 file = "config/copycats-client.toml"
@@ -329,6 +345,10 @@ file = "config/create_enchantment_industry-server.toml"
 hash = "b87028c1e17b49836c0b76266af22a3790e39c668cb4ace199aff7292163f825"
 
 [[files]]
+file = "config/create_power_loader-server.toml"
+hash = "ca3d9eb920cf1eff321af2956f5ed3994713486e6dc2a1e48dbd13988bc1734e"
+
+[[files]]
 file = "config/createbigcannons-client.toml"
 hash = "a97b8ef8b0501c855edd8726b2bc869772fa0f15972d1516cbb481070428eb23"
 
@@ -347,6 +367,10 @@ hash = "16c71790deac2bbdea0099e39cdf8eb47b3dd7ef6337b69ba9fce793a1bf9674"
 [[files]]
 file = "config/curios-server.toml"
 hash = "3c34cf9f7918c6a9ec15b14a87aa4570a751c1688f8ac01cb2e9acfb9392a734"
+
+[[files]]
+file = "config/doubledoors.json5"
+hash = "ed3b25678a185a7c560868e047b60ffd7d7bf9b13d3a45cc5c056f5cfd5b088e"
 
 [[files]]
 file = "config/emi.css"
@@ -378,7 +402,7 @@ hash = "f28783b274567b84d2c96351636c4291a1235c3a76c1b6b97af2aae53830908d"
 
 [[files]]
 file = "config/fabric/indigo-renderer.properties"
-hash = "ce57fafb437b44d82a92e7eca9da6160c59c0335eafa56a8bf03b04871b32d6e"
+hash = "1059fb54e6ae328c5049217ba71b369a018262d03963995ef871f33bdfccc263"
 
 [[files]]
 file = "config/farmersdelight-client.toml"
@@ -422,7 +446,7 @@ hash = "4d3264b58c502afaeca3f44e8d2db0843c54b8ba957afd21a2d450fe10dafefb"
 
 [[files]]
 file = "config/iris.properties"
-hash = "2d12fd322103341d7aef0134c363b742daab8c735ef30fba6102d0d2a9429741"
+hash = "661033a913f92fe748682a7b4bc449b38abcec7959eb9b268e0636cbf4877356"
 
 [[files]]
 file = "config/jade/hide-blocks.json"
@@ -445,6 +469,34 @@ file = "config/jade/sort-order.json"
 hash = "f35c23728549a2a6ebb0c7747de26a30d61ee073f4a104a7bdfe5f2738144fde"
 
 [[files]]
+file = "config/jei-server.toml"
+hash = "57d741871716e29b3a318b625e740d590598f001c362b6a4a95e3ee628c5cbc3"
+
+[[files]]
+file = "config/jei/blacklist.json"
+hash = "b4174dc6e985aa90be5002c14e94b956d8d586683c44b7b6710c44d08fb13648"
+
+[[files]]
+file = "config/jei/jei-client.ini"
+hash = "690df55f936858abf5ed93e681daab91e02b9bea84e128bedf0723556ce19258"
+
+[[files]]
+file = "config/jei/jei-colors.ini"
+hash = "e4bc0c5fce5a7536bce14c94b30e30482e65d63792b29db0ad59d4fa9eb4d1a5"
+
+[[files]]
+file = "config/jei/jei-debug.ini"
+hash = "39b7d63de65fbf7654ee33d521d67095aa17a93226d2d9b7a6fb09305c8990d4"
+
+[[files]]
+file = "config/jei/jei-mod-id-format.ini"
+hash = "4eb3a3eb280558bdd2665fb4792d32551cb6dddc468776e66afc1c3ea981781e"
+
+[[files]]
+file = "config/jei/recipe-category-sort-order.ini"
+hash = "518b5a9674aa2d20085321a3645d1699657c0536e4fb96d7d9abf50dd028a98a"
+
+[[files]]
 file = "config/l2configs/l2core-client.toml"
 hash = "a605a2838f843537e1eabe55ba0a6f14e7e8fdedd8b72a80b4e599bb5bfe98f0"
 
@@ -455,6 +507,10 @@ hash = "39c299d15b33187d1b6e3e8efece13553e96498adab24dd6ac8aca67b2b05b51"
 [[files]]
 file = "config/lithium.properties"
 hash = "6cf6f83720071fd1657c8e79b357caf68d40f410ae123e5f922483eb1d1d25be"
+
+[[files]]
+file = "config/lithostitched.json"
+hash = "d8a63933ec4757186a594debea59dd35724a0a895fe601b324f96217c28312df"
 
 [[files]]
 file = "config/map_atlases-client.toml"
@@ -491,6 +547,10 @@ hash = "45121987f8bbbb948bd5096ffb02b1361c762b3e34836b3f9097a9a4ef7222d4"
 [[files]]
 file = "config/offroad-server.toml"
 hash = "7dda83d4436419564b495e65b4123ab8453eb926cdd8dabc526e41d3ace6bf40"
+
+[[files]]
+file = "config/paxi-neoforge-1_21.toml"
+hash = "a4187daa91d863f90dacfcb443e2f062fe3ddbaace98cfdcfa8b3cc558f1f250"
 
 [[files]]
 file = "config/pipeorgans-client.toml"
@@ -550,7 +610,7 @@ hash = "74ceaca226933e2471df76e5f6a8b1d0e2e339754419fd7c0c8f37fb3b90d243"
 
 [[files]]
 file = "config/sodium-extra-options.json"
-hash = "8a0142fabb2bd2225eca3ca8730e26204d31a691ddcffc858295421793f9eaca"
+hash = "52df5742941d934d422e714c932168ef4e40e8f60a909f8681e8337dd5cf4ec4"
 
 [[files]]
 file = "config/sodium-extra.properties"
@@ -622,7 +682,7 @@ hash = "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
 
 [[files]]
 file = "config/voicechat/voicechat-client.properties"
-hash = "3fde1978cf2eed40b08e36ed9a6e11d054e34b26fe12d1a50b023e7c5bcaab51"
+hash = "b1783a210e69949815a8dd9a0b08d6eedaaeca64a91b43a52e6e5a44bbebaac3"
 
 [[files]]
 file = "config/voicechat/voicechat-server.properties"
@@ -891,6 +951,11 @@ hash = "2af9229718d9edb1eaa4b88fac0063ab2f5f7ba7650a4efa5f0a8e6ce25549cd"
 metafile = true
 
 [[files]]
+file = "mods/create-power-loader.pw.toml"
+hash = "d1a7402cc94a8a857d380f68bb9a19d8981a2b3223068a53d9054e97232f4167"
+metafile = true
+
+[[files]]
 file = "mods/create-sound-of-steam.pw.toml"
 hash = "a7a87fc6ea98d8fbaa426258990f2dec714699e98fb8a083f9a399c90d02844f"
 metafile = true
@@ -908,6 +973,11 @@ metafile = true
 [[files]]
 file = "mods/create-trading-floor.pw.toml"
 hash = "dd46758c8eb82deb6dcd56a9879dc5e583ff812245ebb357fd79053a60c58871"
+metafile = true
+
+[[files]]
+file = "mods/create-ultimate-factory.pw.toml"
+hash = "34d808989e71221b8e01a44bc8031f20af1c94981acb0cba4669e0e58be69629"
 metafile = true
 
 [[files]]
@@ -1223,7 +1293,7 @@ hash = "ef42c22ef97682901a264770e8566efd7eac3046929c995c1e53656b88f88cae"
 
 [[files]]
 file = "options.txt"
-hash = "a36d76a93c97a82ca209d47de558a14b809ca4091029e2e2ab45c3045f95aee1"
+hash = "62c1887cf200316b060ed53993d4d17653f6efdf3a2d1b313bc804c2cc8efb4f"
 
 [[files]]
 file = "resourcepacks/VanillaTweaks_r304834_MC1.21.x.zip"
