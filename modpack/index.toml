@@ -234,7 +234,7 @@ hash = "9620cf27cf18382b4a60d0b7a3ecec9b1e213b84fbb26b5deb4ba24655af3442"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "5ac1d9c7d8e26f3b62dd4d75cceac99721fef67ce46fd73c8ef6015b55b67620"
+hash = "1fb75d2178cd0c4aad9ab814a1bbeda2fa8e149e2f9ce070127910a4412c8eec"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
@@ -948,11 +948,6 @@ metafile = true
 [[files]]
 file = "mods/create-liquid-fuel.pw.toml"
 hash = "2af9229718d9edb1eaa4b88fac0063ab2f5f7ba7650a4efa5f0a8e6ce25549cd"
-metafile = true
-
-[[files]]
-file = "mods/create-power-loader.pw.toml"
-hash = "d1a7402cc94a8a857d380f68bb9a19d8981a2b3223068a53d9054e97232f4167"
 metafile = true
 
 [[files]]
