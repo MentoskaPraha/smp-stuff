@@ -226,7 +226,7 @@ hash = "3e05221436880d09fbac95dfc9cde9d2225e8cfdb81ea0c4a41a453934acf938"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "ae67e5f730c80891beb4145c625f1ab986e7374efbbf5273dbb1bace8eed6b50"
+hash = "78abccc7fb974f5670d30d986b31b8ad81bca196ac4d253d0a1a481a4b3c211a"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
@@ -1038,6 +1038,11 @@ metafile = true
 [[files]]
 file = "mods/jade.pw.toml"
 hash = "b6e0a61fea06f8d6d8e1672cf07b682625c4b74efd548d5093cd9c1fed167eec"
+metafile = true
+
+[[files]]
+file = "mods/jei.pw.toml"
+hash = "e7b3c08c8b168d15e3997d41d0480d1d35cba0bdda94094f123d1eef65d0b0c4"
 metafile = true
 
 [[files]]

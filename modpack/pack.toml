@@ -1,12 +1,12 @@
 name = "Aeronautics SMP"
 author = "MentoskaPraha & Gljue"
-version = "1.1.0"
+version = "1.2.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "1b7e88c17009f3af2d06fe3c6d2ba34d1de49dcf5bd8c7f859983f180d6c9a80"
+hash = "6c09d19e705d6cb0b2aae36ad92ee37659de97106ab7066362fc2751b7cacd69"
 
 [versions]
 minecraft = "1.21.1"
