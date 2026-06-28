@@ -234,7 +234,7 @@ hash = "9620cf27cf18382b4a60d0b7a3ecec9b1e213b84fbb26b5deb4ba24655af3442"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "1fb75d2178cd0c4aad9ab814a1bbeda2fa8e149e2f9ce070127910a4412c8eec"
+hash = "b07cb3648580e6dc018281092ba463197acb3e08d7bcdedaca91d5324a19f149"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
@@ -951,6 +951,11 @@ hash = "2af9229718d9edb1eaa4b88fac0063ab2f5f7ba7650a4efa5f0a8e6ce25549cd"
 metafile = true
 
 [[files]]
+file = "mods/create-power-loader.pw.toml"
+hash = "d1a7402cc94a8a857d380f68bb9a19d8981a2b3223068a53d9054e97232f4167"
+metafile = true
+
+[[files]]
 file = "mods/create-sound-of-steam.pw.toml"
 hash = "a7a87fc6ea98d8fbaa426258990f2dec714699e98fb8a083f9a399c90d02844f"
 metafile = true
@@ -958,11 +963,6 @@ metafile = true
 [[files]]
 file = "mods/create-steam-n-rails-1.21.1.pw.toml"
 hash = "84cff9a09538552608e32a14b4f7f37d5ac0f4cface3953e68c3af5104217554"
-metafile = true
-
-[[files]]
-file = "mods/create-threaded-trains.pw.toml"
-hash = "f802c6f488a0141d9a51624bcce33c80c2c3d4bea731ea3f9301a6ec9d36cf4d"
 metafile = true
 
 [[files]]
