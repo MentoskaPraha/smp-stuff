@@ -234,7 +234,7 @@ hash = "9620cf27cf18382b4a60d0b7a3ecec9b1e213b84fbb26b5deb4ba24655af3442"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "b07cb3648580e6dc018281092ba463197acb3e08d7bcdedaca91d5324a19f149"
+hash = "55fe4259b8dd6c7fbfe12ecb97571b592ec914a82d718cdeb8b511d3ffb56713"
 
 [[files]]
 file = "config/better-advanced-tooltips-client.toml"
@@ -799,6 +799,10 @@ hash = "de8ae409b1b0fa48512449bc72ee06388fbbb30098307cd54481e5dd3dd9e96a"
 [[files]]
 file = "kubejs/data/wandering trades v1.7.14 (MC 1.21-1.21.11).zip"
 hash = "f9162390d08d058034f536bb5f5e8d87237d44d8a715058778ead6edd675d18e"
+
+[[files]]
+file = "kubejs/server_scripts/coins.js"
+hash = "612e8da7deae1f6e916f94a8423db0af7e7f6b5d98bce6f38583f4ec2d2b2ae4"
 
 [[files]]
 file = "mods/ai-improvements.pw.toml"
